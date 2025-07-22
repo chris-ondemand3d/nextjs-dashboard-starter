@@ -71,10 +71,8 @@ This template is optimized for pair programming with [Claude Code](https://claud
 - [Tailwind CSS](https://tailwindcss.com/docs) - Utility-first CSS framework
 - [TypeScript](https://www.typescriptlang.org/docs) - Typed JavaScript
 
-## Deploy on Vercel
+## Deploy on Squadbase
 
-Deploy easily with the [Vercel Platform](https://vercel.com/new):
+Click the button to clone this repository and deploy it on Squadbase.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/your-username/nextjs-dashboard-starter)
-
-Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[![Deploy to Squadbase](https://app.squadbase.dev/button.svg)](https://app.squadbase.dev/new/clone?repository-url=https://github.com/squadbase/nextjs-dashboard-starter.git)
