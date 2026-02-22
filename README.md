@@ -39,15 +39,57 @@ npm run dev
 ## Project Structure
 
 ```
-├── app/                 # Next.js App Router pages
-│   ├── layout.tsx      # Root layout with fonts and metadata
-│   ├── page.tsx        # Homepage - start building here
-│   └── globals.css     # Global styles
-├── components/         # Reusable UI components (create as needed)
-├── lib/               # Utility functions
-├── public/            # Static assets
-└── hooks/             # Custom React hooks
+├── app/
+│   ├── layout.tsx                        # Root layout (fonts, sidebar, theme)
+│   ├── page.tsx                          # Home dashboard (KPI cards, charts)
+│   ├── globals.css                       # Global styles
+│   ├── customers/
+│   │   ├── page.tsx                      # Customers table (paginated, keyboard nav)
+│   │   └── [id]/orders/
+│   │       └── page.tsx                  # Customer order details with items
+│   └── api/
+│       └── customers/
+│           ├── route.ts                  # GET /api/customers (paginated query)
+│           └── [id]/orders/
+│               └── route.ts             # GET /api/customers/:id/orders
+├── components/
+│   ├── app-sidebar.tsx                   # Sidebar navigation (Home, Customers)
+│   ├── analytics/                        # Dashboard chart components
+│   └── ui/                               # shadcn/ui components (Table, Card, Button, etc.)
+├── lib/
+│   ├── db.ts                             # PostgreSQL connection pool (pg)
+│   ├── data.ts                           # Sample data for dashboard charts
+│   └── utils.ts                          # Utility functions (cn)
+├── public/
+│   └── sample_data/                      # CSV files (users, orders, order_items, products)
+└── hooks/                                # Custom React hooks
 ```
+
+## Code Overview
+
+### Database Connection
+
+PostgreSQL connection via `pg` library using `DATABASE_URL` from `.env`. Connects to a Supabase-hosted database with SSL.
+
+### Customers Page (`/customers`)
+
+- Fetches paginated data from `/api/customers` with configurable page size (10/20/50/100)
+- Server-side pagination using SQL `LIMIT`/`OFFSET`
+- Row selection via mouse click or Arrow Up/Down keyboard navigation
+- Double-click or Enter key navigates to the selected customer's orders
+- Auto-scrolls selected row into view during keyboard navigation
+
+### Customer Orders Page (`/customers/[id]/orders`)
+
+- Displays all orders for a customer in a table
+- Each order's items shown in separate Card components with product name, price, and quantity
+- Joins `order_items` with `products` table for product details
+- Back button to return to the customers list
+
+### Home Dashboard (`/`)
+
+- KPI summary cards
+- Charts: orders over time, traffic sources, top countries, order status, demographics, user registrations
 
 ## Building Your Dashboard
 
